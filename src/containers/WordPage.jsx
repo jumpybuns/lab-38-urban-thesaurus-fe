@@ -11,9 +11,12 @@ const WordPage = () => {
     });
   }, []);
 
+  const handleSubmit = ({ target }) => {
+    searchWords(target.value).then((words) => setSearchWords({ words }));
+  };
   return (
     <>
-      <WordList words={words} />
+      <WordList words={words} onSubmit={handleSubmit} />
     </>
   );
 };

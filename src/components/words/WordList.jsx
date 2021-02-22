@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Word from './Word';
 
-const WordList = ({ words }) => {
+const WordList = ({ words, onSubmit }) => {
   const wordElements = words.map((word) => (
     <li key={word.id}>
       <Word {...word} />
@@ -11,15 +11,16 @@ const WordList = ({ words }) => {
 
   return (
     <>
+      <form onSubmit={onSubmit}>
+        <input type="text" placeholder="search" value={words} />
+      </form>
       <ul>{wordElements}</ul>
     </>
   );
 };
 WordList.propTypes = {
-  id: PropTypes.string.isRequired,
-  word: PropTypes.string.isRequired,
-  definition: PropTypes.string.isRequired,
-  example: PropTypes.string.isRequired,
+  words: PropTypes.array.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default WordList;
