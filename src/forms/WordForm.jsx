@@ -1,31 +1,21 @@
-import React, { Component } from 'react';
-import { getWords, searchWords } from '../services/urbanDictionaryAPI';
+import React from 'react';
+import { useSearch } from '../hooks/Search';
+import WordList from '../components/words/WordList';
 
-export default class WordForm extends Component {
-  state = {
-    searchWords: '',
-    words: [],
-  };
+const WordForm = () => {
+  const { searchResults, setSearchTerm, handleSubmit } = useSearch();
 
-  componentDidMount() {
-    getWords().then((words) => this.setState({ words }));
-  }
+  return (
+    <div>
+      <button onClick={handleSubmit}>Submit</button>
+      <input
+        type="text"
+        placeholder="search"
+        onChange={({ target }) => setSearchTerm(target.value)}
+      />
+      <WordList words={searchResults} />
+    </div>
+  );
+};
 
-  handleChange = ({ target }) => {
-    searchWords(target.value).then((words) => this.setState({ words }));
-    this.setState({ searchWords: target.value });
-  };
-  render() {
-    return (
-      <>
-        <input
-          type="text"
-          placeholder="Title"
-          value={searchWords}
-          onChange={handleChange}
-        />
-        <WordList onChange={handleChange} words={words} />
-      </>
-    );
-  }
-}
+export default WordForm;

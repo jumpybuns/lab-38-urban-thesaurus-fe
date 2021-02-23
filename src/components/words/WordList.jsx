@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Word from './Word';
 
 const WordList = ({ words }) => {
-  const wordElements = words.map((words) => (
-    <li key={words.word}>
-      <Word {...words} />
+  const wordElements = words.map((word) => (
+    <li key={word.word}>
+      <Word {...word} />
     </li>
   ));
 

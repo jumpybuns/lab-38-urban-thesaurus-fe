@@ -4,13 +4,20 @@ export const getWords = () => {
   ).then((res) => res.json());
 };
 
-export const searchWords = (word) => {
+export const searchWords = (search) => {
   return fetch(
-    `https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${word}`
+    `https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${search}`,
+    {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-key': 'a5d4ff71fcmsh6c9425374da360fp1168dcjsn4bf2045f5c5a',
+        'x-rapidapi-host': 'mashape-community-urban-dictionary.p.rapidapi.com',
+      },
+    }
   )
     .then((res) => res.json())
     .then((results) =>
-      results.map(({ word, definition, example }) => ({
+      results.list.map(({ word, definition, example }) => ({
         word,
         definition,
         example,
