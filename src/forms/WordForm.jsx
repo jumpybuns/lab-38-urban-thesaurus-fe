@@ -1,33 +1,31 @@
-import React, { useState } from 'react';
-import { searchWords } from '../services/urbanDictionaryAPI';
-import { useDispatch } from 'react-redux';
+import React, { Component } from 'react';
+import { getWords, searchWords } from '../services/urbanDictionaryAPI';
 
-const WordForm = () => {
-  const dispatch = useDispatch();
-  const [search, setSearch] = useState('');
-  const [definition, setDefinition] = useState('');
-  const [example, setExample] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(searchWords({ definition, example }));
-    setDefinition('');
-    setExample('');
+export default class WordForm extends Component {
+  state = {
+    searchWords: '',
+    words: [],
   };
 
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
+  componentDidMount() {
+    getWords().then((words) => this.setState({ words }));
+  }
+
+  handleChange = ({ target }) => {
+    searchWords(target.value).then((words) => this.setState({ words }));
+    this.setState({ searchWords: target.value });
+  };
+  render() {
+    return (
+      <>
         <input
           type="text"
           placeholder="Title"
-          value={search}
-          onChange={({ target }) => setSearch(target.value)}
+          value={searchWords}
+          onChange={handleChange}
         />
-        <button onSubmit={handleSubmit}>Submit</button>
-      </form>
-    </>
-  );
-};
-
-export default WordForm;
+        <WordList onChange={handleChange} words={words} />
+      </>
+    );
+  }
+}

@@ -8,7 +8,11 @@ export default class App extends Component {
       <div>
         <Router>
           <Switch>
-            <Route exact path="/" component={WordPage} />
+            <Route
+              exact
+              path="/"
+              render={(routerProps) => <WordPage {...routerProps} />}
+            />
           </Switch>
         </Router>
       </div>
