@@ -17,7 +17,8 @@ export const searchWords = (search) => {
   )
     .then((res) => res.json())
     .then((results) =>
-      results.list.map(({ word, definition, example }) => ({
+      results.list.map(({ defid, word, definition, example }) => ({
+        defid,
         word,
         definition,
         example,

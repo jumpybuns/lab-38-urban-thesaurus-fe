@@ -10,7 +10,7 @@ const Word = ({ word, definition, example }) => (
 );
 
 Word.propTypes = {
-  id: PropTypes.string.isRequired,
+  defid: PropTypes.number.isRequired,
   word: PropTypes.string.isRequired,
   definition: PropTypes.string.isRequired,
   example: PropTypes.string.isRequired,

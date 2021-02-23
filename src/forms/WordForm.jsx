@@ -7,13 +7,15 @@ const WordForm = () => {
 
   return (
     <div>
-      <button onClick={handleSubmit}>Submit</button>
-      <input
-        type="text"
-        placeholder="search"
-        onChange={({ target }) => setSearchTerm(target.value)}
-      />
-      <WordList words={searchResults} />
+      <form>
+        <button onClick={handleSubmit}>Submit</button>
+        <input
+          type="text"
+          placeholder="search"
+          onChange={({ target }) => setSearchTerm(target.value)}
+        />
+        <WordList words={searchResults} />
+      </form>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import Word from './Word';
 
 const WordList = ({ words }) => {
   const wordElements = words.map((word) => (
-    <li key={word.word}>
+    <li key={word.defid}>
       <Word {...word} />
     </li>
   ));
